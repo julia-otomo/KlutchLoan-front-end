@@ -18,7 +18,7 @@ type TInformationProps = {
 
 const Information = ({ img1, img2, text }: TInformationProps) => {
   return (
-    <div className="mt-[59px] w-screen flex items-center justify-center">
+    <div className="mt-[59px] w-full flex items-center justify-center">
       <div className="w-[60%] py-8 flex items-center gap-8">
         <Image src={img1} alt="" />
         <Image src={img2} alt="" />

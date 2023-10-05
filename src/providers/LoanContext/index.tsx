@@ -1,6 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   TClient,
+  TInstallment,
   TLoanContext,
   TLoanProviderProps,
   TRateTable,
@@ -8,6 +9,7 @@ import {
   TSolicitationCreateUpdate,
 } from "./@types";
 import api from "@/services/api";
+import { toast } from "react-toastify";
 
 const LoanContext = createContext({} as TLoanContext);
 
@@ -18,6 +20,8 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
   const [valueInput, setValueInput] = useState<string | null>(null);
   const [clientSolicitation, setClientSolicitation] =
     useState<TSolicitation | null>(null);
+  const [installment, setInstallment] = useState<TInstallment | null>(null);
+  const [table, setTable] = useState<TRateTable | null>(null);
 
   const createOrUpdateSolicitation = async (
     data: TSolicitationCreateUpdate
@@ -28,7 +32,7 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     if (solicitationId) {
       try {
         const solicitation = await api.patch<TSolicitation>(
-          `api/solicitations/${solicitationId}/`,
+          `api/solicitation/${solicitationId}/`,
           data
         );
 
@@ -41,6 +45,9 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         setClientSolicitation(solicitation.data);
       } catch (error) {
         console.log(error);
+        toast.error(
+          "O valor desejado deve estar entre o intervalo de 300 à 10.000"
+        );
       }
     }
 
@@ -59,6 +66,9 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
       setClientSolicitation(solicitation.data);
     } catch (error) {
       console.log(error);
+      toast.error(
+        "O valor desejado deve estar entre o intervalo de 300 à 10.000"
+      );
     }
   };
 
@@ -69,7 +79,7 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     if (solicitationId) {
       try {
         const solicitation = await api.patch<TSolicitation>(
-          `api/solicitations/${solicitationId}/`,
+          `api/solicitation/${solicitationId}/`,
           data
         );
 
@@ -124,6 +134,19 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     }
   };
 
+  useEffect(() => {
+    const getSolicitationEffect = async () => {
+      const solicitationId =
+        Number(localStorage.getItem("SolicitationTable:id")) || null;
+
+      if (solicitationId) {
+        await getSolicitation();
+      }
+    };
+
+    getSolicitationEffect();
+  }, []);
+
   return (
     <LoanContext.Provider
       value={{
@@ -138,6 +161,10 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         clientSolicitation,
         updateSolicitation,
         getSolicitation,
+        installment,
+        setInstallment,
+        table,
+        setTable,
       }}
     >
       {children}

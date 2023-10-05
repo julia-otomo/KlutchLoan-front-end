@@ -79,6 +79,10 @@ type TLoanContext = {
   getClient: (cpf: string) => Promise<void>;
   updateSolicitation: (data: TSolicitationCreateUpdate) => Promise<void>;
   getSolicitation: () => Promise<void>;
+  setInstallment: Dispatch<SetStateAction<TInstallment | null>>;
+  installment: TInstallment | null;
+  table: TRateTable | null;
+  setTable: Dispatch<SetStateAction<TRateTable | null>>;
 };
 
 export type {
@@ -88,4 +92,5 @@ export type {
   TClient,
   TSolicitation,
   TLoanContext,
+  TInstallment,
 };
