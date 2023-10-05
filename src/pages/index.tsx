@@ -6,15 +6,17 @@ import ValueForm from "@/components/ValueForm";
 import { useContext } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import TablesContainer from "@/components/TablesContainer";
+import FirstPageFooter from "@/components/FirstPageFooter";
 
 const Home = () => {
-  const { tables } = useContext(LoanContext);
+  const { tables, installment } = useContext(LoanContext);
   return (
     <>
       <Header />
       <Information img1={plus} img2={file} text="Simulação de Taxas" />
       <ValueForm />
       {tables.length > 0 && <TablesContainer />}
+      {installment && <FirstPageFooter />}
     </>
   );
 };

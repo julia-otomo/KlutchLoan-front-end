@@ -77,7 +77,10 @@ type TLoanContext = {
   ) => Promise<void>;
   getAllTables: (value: number) => Promise<void>;
   getClient: (cpf: string) => Promise<void>;
-  updateSolicitation: (data: TSolicitationCreateUpdate) => Promise<void>;
+  updateSolicitation: (
+    data?: TSolicitationCreateUpdate,
+    query?: string
+  ) => Promise<void>;
   getSolicitation: () => Promise<void>;
   setInstallment: Dispatch<SetStateAction<TInstallment | null>>;
   installment: TInstallment | null;

@@ -9,7 +9,7 @@ const TablesContainer = () => {
       {tables.map((table) => (
         <div key={table.id}>
           <h3>{table.name}</h3>
-          <TableFlowbite installments={table.installments} />
+          <TableFlowbite installments={table.installments} table={table} />
         </div>
       ))}
     </div>

@@ -5,9 +5,10 @@ import { useContext } from "react";
 
 type TTableProps = {
   installments: TInstallment[];
+  table: TRateTable;
 };
 
-const TableFlowbite = ({ installments }: TTableProps) => {
+const TableFlowbite = ({ installments, table }: TTableProps) => {
   const tableHead = [
     "Parcela",
     "Juros da Parcela",
@@ -16,21 +17,12 @@ const TableFlowbite = ({ installments }: TTableProps) => {
     "Comissão Parceiro",
   ];
 
-  const { setInstallment, tables, setTable } = useContext(LoanContext);
+  const { setInstallment, setTable } = useContext(LoanContext);
 
   const getInstallment = (inst: TInstallment) => {
     setInstallment(inst);
 
-    const findTable: TRateTable | undefined = tables.find((table) => {
-      table.installments.forEach((item) => {
-        if (item.id == inst.id) {
-          return item;
-        }
-      });
-      return table;
-    });
-
-    setTable(findTable!);
+    setTable(table);
   };
 
   return (
@@ -46,6 +38,7 @@ const TableFlowbite = ({ installments }: TTableProps) => {
             id={String(item.id)}
             key={item.id}
             onClick={() => getInstallment(item)}
+            className=" cursor-pointer"
           >
             <Table.Cell className=" whitespace-nowrap">
               {item.installment_number}

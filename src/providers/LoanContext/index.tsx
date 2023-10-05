@@ -49,37 +49,40 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
           "O valor desejado deve estar entre o intervalo de 300 à 10.000"
         );
       }
-    }
+    } else {
+      try {
+        const solicitation = await api.post<TSolicitation>(
+          "api/solicitations/",
+          data
+        );
 
-    try {
-      const solicitation = await api.post<TSolicitation>(
-        "api/solicitations/",
-        data
-      );
+        localStorage.setItem(
+          "SolicitationTable:id",
+          String(solicitation.data.id)
+        );
 
-      localStorage.setItem(
-        "SolicitationTable:id",
-        String(solicitation.data.id)
-      );
-
-      setDesiredValue(solicitation.data.desired_value);
-      setClientSolicitation(solicitation.data);
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        "O valor desejado deve estar entre o intervalo de 300 à 10.000"
-      );
+        setDesiredValue(solicitation.data.desired_value);
+        setClientSolicitation(solicitation.data);
+      } catch (error) {
+        console.log(error);
+        toast.error(
+          "O valor desejado deve estar entre o intervalo de 300 à 10.000"
+        );
+      }
     }
   };
 
-  const updateSolicitation = async (data: TSolicitationCreateUpdate) => {
+  const updateSolicitation = async (
+    data?: TSolicitationCreateUpdate,
+    query?: string
+  ) => {
     const solicitationId =
       Number(localStorage.getItem("SolicitationTable:id")) || null;
 
     if (solicitationId) {
       try {
         const solicitation = await api.patch<TSolicitation>(
-          `api/solicitation/${solicitationId}/`,
+          `api/solicitation/${solicitationId}/${query ? query : ""}`,
           data
         );
 
