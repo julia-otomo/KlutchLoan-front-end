@@ -15,13 +15,17 @@ const SolicitationPage = () => {
   return (
     <>
       <Header />
-      <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
+      <div className="max-w-[1266px] my-0 mx-auto">
+        <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
+      </div>
 
-      <main>
-        <h2>Solicitação Realizada com Sucesso!</h2>
-        <div>
-          <h3>Resumo da Solicitação</h3>
-          <div className="flex flex-wrap">
+      <main className="max-w-[1266px] my-0 mx-auto flex flex-col items-center mt-8 gap-8 min-h-[800px]">
+        <h2 className="text-brand-1 text-2xl font-bold">
+          Solicitação Realizada com Sucesso!
+        </h2>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-brand-1 text-xl ">Resumo da Solicitação</h3>
+          <div className="flex flex-wrap gap-8">
             <ConfirmedValueContainer
               title={clientSolicitation ? clientSolicitation.client.name : ""}
               value={clientSolicitation ? clientSolicitation.client.phone : ""}
@@ -80,7 +84,15 @@ const SolicitationPage = () => {
             />
           </div>
         </div>
-        <Link href="/details">Detalhe da Solicitação</Link>
+        <div className=" flex flex-col gap-4 mt-10 items-center">
+          <Link
+            href="/details"
+            className="w-[420px] h-[94px] bg-brand-1 rounded-md text-white text-3xl font-bold text-center py-8 hover:bg-brand-3"
+          >
+            Detalhe da Solicitação
+          </Link>
+          <p className="text-brand-1">O CredFica avaliará a solicitação</p>
+        </div>
       </main>
     </>
   );
