@@ -46,7 +46,7 @@ const CardForm = () => {
 
   return (
     <div className="w-full flex flex-col items-center mt-8">
-      <form onSubmit={handleSubmit(onSubmitForm)}>
+      <form onSubmit={handleSubmit(onSubmitForm)} className="flex flex-col">
         <div className="flex flex-row gap-12">
           <div className="flex flex-col w-[472px] items-center gap-4">
             <h2 className="text-xl text-brand-1">Insira os dados do Cartão</h2>
@@ -117,7 +117,7 @@ const CardForm = () => {
         </div>
         <button
           type="submit"
-          className="mt-8 w-[391px] h-[98px] bg-brand-1 text-3xl text-grey-1 font-bold py-8 rounded-md hover:bg-brand-3 text-center"
+          className="mt-8 w-[391px] h-[98px] bg-brand-1 text-3xl text-grey-1 font-bold py-8 rounded-md hover:bg-brand-3 text-center self-center"
         >
           Continuar
         </button>
