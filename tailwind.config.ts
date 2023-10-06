@@ -14,6 +14,9 @@ const config: Config = {
       colors: {
         "brand-1": "#228A95",
         "brand-2": "#EF9C4B",
+        "brand-3": "#187680",
+        "brand-4": "#FD8030",
+        "grey-0": "#777777",
         "grey-1": "#F8F8F8",
       },
     },

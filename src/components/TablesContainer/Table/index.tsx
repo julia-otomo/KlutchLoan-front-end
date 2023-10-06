@@ -27,9 +27,11 @@ const TableFlowbite = ({ installments, table }: TTableProps) => {
 
   return (
     <Table hoverable>
-      <Table.Head>
+      <Table.Head className="text-center">
         {tableHead.map((head, index) => (
-          <Table.HeadCell key={index}>{head}</Table.HeadCell>
+          <Table.HeadCell key={index} className="text-[1.2rem]">
+            {head}
+          </Table.HeadCell>
         ))}
       </Table.Head>
       <Table.Body className="divide-y">
@@ -38,7 +40,7 @@ const TableFlowbite = ({ installments, table }: TTableProps) => {
             id={String(item.id)}
             key={item.id}
             onClick={() => getInstallment(item)}
-            className=" cursor-pointer"
+            className=" cursor-pointer focus:to-brand-2 text-center text-[1rem]"
           >
             <Table.Cell className=" whitespace-nowrap">
               {item.installment_number}

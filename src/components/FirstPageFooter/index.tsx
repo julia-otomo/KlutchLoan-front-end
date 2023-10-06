@@ -24,14 +24,18 @@ const FirstPageFooter = () => {
 
   return (
     <div className="flex w-full items-center justify-center h-[86px] bg-brand-1 gap-[10%] fixed bottom-0">
-      <div className="flex text-slate-100">
+      <div className="flex flex-row gap-4 text-slate-100 text-xl font-bold w-[80%] max-w-[60rem]">
         <h3>{`Nome: ${table?.name}`}</h3>
         <h3>{`Parcelas: ${installment?.installment_number}`}</h3>
         <h3>{`Valor da Parcela: R$${installment?.installment_value.toFixed(
           2
         )}`}</h3>
       </div>
-      <Link href="/client" onClick={update}>
+      <Link
+        href="/client"
+        onClick={update}
+        className="w-[160px] h-[56px] bg-brand-2 text-white font-semibold rounded-md hover:bg-brand-4 text-center p-[0.95rem]"
+      >
         Avançar
       </Link>
     </div>

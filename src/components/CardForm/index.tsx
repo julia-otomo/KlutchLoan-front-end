@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { TRegisterCard, registerCardSchema } from "./validator";
 import Input from "./Input";
 import InputFile from "./InputFile";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import Link from "next/link";
 
@@ -15,6 +15,10 @@ const CardForm = () => {
   } = useForm<TRegisterCard>({
     resolver: zodResolver(registerCardSchema),
   });
+
+  const [frontImage, setFrontImage] = useState<File | null>(null);
+  const [backImage, setBackImage] = useState<File | null>(null);
+  const [selfieImage, setSelfieImage] = useState<File | null>(null);
 
   const { createCard, updateSolicitation } = useContext(LoanContext);
 
@@ -62,17 +66,17 @@ const CardForm = () => {
             <InputFile
               id="front_image"
               label="Cartão de Crédito (Frente)"
-              {...register("front_image")}
+              required
             />
             <InputFile
               id="back_image"
               label="Cartão de Crédito (Verso)"
-              {...register("back_image")}
+              required
             />
             <InputFile
               id="selfie_image"
               label="Selfie com cartão de crédito"
-              {...register("selfie_image")}
+              required
             />
             <p>
               Atenção: As fotos devem estar legíveis, com todas as informações
