@@ -29,6 +29,8 @@ const PreSolicitation = () => {
     updateSolicitation,
   } = useContext(LoanContext);
 
+  console.log(clientSolicitation);
+
   const { register, handleSubmit, setValue } = useForm<TFormProps>({});
 
   useEffect(() => {
@@ -59,7 +61,11 @@ const PreSolicitation = () => {
   return (
     <>
       <Header />
-      <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+      <form
+        action=""
+        onSubmit={handleSubmit(onSubmitForm)}
+        className=" max-w-[1218px] my-0 mx-auto flex flex-col gap-4 min-h-[750px]"
+      >
         <div className="flex items-center">
           <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
           <Select
@@ -72,7 +78,7 @@ const PreSolicitation = () => {
           />
         </div>
 
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-8">
           <PreSolicitationValueContainer
             title="Valor Desejado"
             value={clientSolicitation ? clientSolicitation.desired_value : 0}
@@ -83,7 +89,7 @@ const PreSolicitation = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-row gap-8">
           <Select
             arr={
               clientSolicitation
@@ -104,29 +110,40 @@ const PreSolicitation = () => {
           />
         </div>
 
-        <div>
-          <div>
-            <InputRadio
-              id="automatic"
-              inputValue="automatic"
-              title="Automático"
-              {...register("contract_type")}
-            />
-            <InputRadio
-              id="manual"
-              inputValue="manual"
-              title="Manual"
-              {...register("contract_type")}
-            />
+        <div className="flex flex-row gap-4">
+          <div className=" flex flex-col gap-4">
+            <h3 className="text-brand-1">Escolha o tipo de contrato</h3>
+            <div className="flex gap-4">
+              <InputRadio
+                id="automatic"
+                inputValue="automatic"
+                title="Automático"
+                {...register("contract_type")}
+              />
+              <InputRadio
+                id="manual"
+                inputValue="manual"
+                title="Manual"
+                {...register("contract_type")}
+              />
+            </div>
           </div>
-          <button type="submit">Avançar</button>
+
+          <button
+            type="submit"
+            className=" w-[600px] h-[98px] bg-brand-1 text-white text-3xl font-bold rounded-md mt-8 hover:bg-brand-3"
+          >
+            ✔ Concluir
+          </button>
         </div>
       </form>
       {clientSolicitation && table ? (
-        <TableFlowbite
-          installments={table.installments}
-          table={clientSolicitation.rate_table}
-        />
+        <div className="max-w-[1218px] my-0 mx-auto mb-10">
+          <TableFlowbite
+            installments={table.installments}
+            table={clientSolicitation.rate_table}
+          />
+        </div>
       ) : null}
     </>
   );

@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 const LoanContext = createContext({} as TLoanContext);
 
 const LoanProvider = ({ children }: TLoanProviderProps) => {
+  const router = useRouter();
   const [desiredValue, setDesiredValue] = useState(0);
   const [tables, setTables] = useState<TRateTable[]>([]);
   const [client, setClient] = useState<TClient | null>(null);
@@ -157,13 +158,8 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
   }, []);
 
   const createCard = async (data: TCardCreate, cpf: string) => {
-    const router = useRouter();
     try {
-      const creditCard = await api.post(`api/cards/client/${cpf}/`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const creditCard = await api.post(`api/cards/client/${cpf}/`, data);
 
       setCard(creditCard.data);
 

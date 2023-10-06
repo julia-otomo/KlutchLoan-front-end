@@ -16,9 +16,16 @@ const Select = forwardRef(
     ref: ForwardedRef<HTMLSelectElement>
   ) => {
     return (
-      <fieldset>
-        <label htmlFor={id}>{label}</label>
-        <select id={id} ref={ref} {...rest}>
+      <fieldset className="w-[600px] h-[97px] bg-grey-1 rounded-md flex flex-row items-center px-4 justify-between">
+        <label htmlFor={id} className="text-brand-1 text-xl font-bold italic">
+          {label}
+        </label>
+        <select
+          id={id}
+          ref={ref}
+          {...rest}
+          className="h-[70%] w-[296px] rounded-md"
+        >
           {arr.map((item) => (
             <React.Fragment key={item.id}>
               {typeSelect == "table" ? (

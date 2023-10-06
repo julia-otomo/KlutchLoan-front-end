@@ -21,3 +21,8 @@ li {
 button {
   cursor: pointer;
 }
+
+input[type="radio"]:checked + label {
+  background-color: #228a95;
+  color: #ffffff;
+}

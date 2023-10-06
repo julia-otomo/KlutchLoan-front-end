@@ -8,7 +8,10 @@ const CardRegister = () => {
   return (
     <>
       <Header />
-      <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
+      <div className="max-w-[1218px] my-0 mx-auto">
+        <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
+      </div>
+
       <CardForm />
     </>
   );

@@ -13,9 +13,15 @@ const Input = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <fieldset>
-        <input type="text" id={id} {...rest} ref={ref} />
-        {errors && <p>{errors.message}</p>}
+      <fieldset className="w-full flex flex-col gap-4">
+        <input
+          type="text"
+          id={id}
+          {...rest}
+          ref={ref}
+          className="w-full h-[70px] cursor-pointer border-[1px] border-transparent bg-grey-1 rounded-md text-slate-800 text-lg font-medium"
+        />
+        {errors && <p className="text-red-800 text-md">{errors.message}</p>}
       </fieldset>
     );
   }

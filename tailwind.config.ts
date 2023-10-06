@@ -18,6 +18,7 @@ const config: Config = {
         "brand-4": "#FD8030",
         "grey-0": "#777777",
         "grey-1": "#F8F8F8",
+        "success-color": "#E8FFE3",
       },
     },
   },

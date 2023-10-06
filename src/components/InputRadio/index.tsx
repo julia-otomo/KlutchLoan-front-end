@@ -13,7 +13,7 @@ const InputRadio = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <fieldset>
+      <fieldset className="w-[300px] h-[98px] rounded-md flex flex-col items-center justify-center cursor-pointer checked:bg-brand-1 checked:text-grey-1">
         <input
           type="radio"
           name="contract_type"
@@ -21,8 +21,14 @@ const InputRadio = forwardRef(
           id={id}
           {...rest}
           ref={ref}
+          className="hidden"
         />
-        <label htmlFor={id}>{title}</label>
+        <label
+          htmlFor={id}
+          className=" w-full h-full rounded-md text-center py-8 text-brand-1  text-3xl font-bold cursor-pointer"
+        >
+          {title}
+        </label>
       </fieldset>
     );
   }
