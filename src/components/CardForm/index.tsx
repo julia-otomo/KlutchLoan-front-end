@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { TRegisterCard, registerCardSchema } from "./validator";
@@ -7,6 +8,7 @@ import { useContext, useState } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import Link from "next/link";
 import { TCardCreate } from "@/providers/LoanContext/@types";
+import { useRouter } from "next/router";
 
 const CardForm = () => {
   const {
@@ -16,6 +18,8 @@ const CardForm = () => {
   } = useForm<TRegisterCard>({
     resolver: zodResolver(registerCardSchema),
   });
+
+  const router = useRouter();
 
   const [frontImage, setFrontImage] = useState<File | null>(null);
   const [backImage, setBackImage] = useState<File | null>(null);
@@ -36,6 +40,8 @@ const CardForm = () => {
     createCard(newFormData, clientSolicitation!.client.cpf);
 
     updateSolicitation({ card_number: data.card_number });
+
+    router.push("/preSolicitation");
   };
 
   return (
@@ -109,14 +115,13 @@ const CardForm = () => {
             </p>
           </div>
         </div>
-        <button type="submit">Confirmar</button>
+        <button
+          type="submit"
+          className="mt-8 w-[391px] h-[98px] bg-brand-1 text-3xl text-grey-1 font-bold py-8 rounded-md hover:bg-brand-3 text-center"
+        >
+          Continuar
+        </button>
       </form>
-      <Link
-        href="/preSolicitation"
-        className="mt-8 w-[391px] h-[98px] bg-brand-1 text-3xl text-grey-1 font-bold py-8 rounded-md hover:bg-brand-3 text-center"
-      >
-        Continuar
-      </Link>
     </div>
   );
 };
