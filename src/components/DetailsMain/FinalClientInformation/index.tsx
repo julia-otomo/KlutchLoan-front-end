@@ -14,8 +14,8 @@ const FinalClientInformation = ({
   account_number,
 }: TFinalClientInformation) => {
   return (
-    <div>
-      <p>Informações do Cliente:</p>
+    <div className="w-[586px] h-[332px] p-8 flex flex-col gap-4 text-grey-0 text-lg italic font-bold bg-grey-1 rounded-md">
+      <p className=" font-normal not-italic ">Informações do Cliente:</p>
       <p>{`Nome: ${name}`}</p>
       <p>{`CPF: ${cpf}`}</p>
       <p>{`Banco: ${bank_label}`}</p>
