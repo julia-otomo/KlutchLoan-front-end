@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import { TInstallment, TRateTable } from "@/providers/LoanContext/@types";
-import React, { ForwardedRef, forwardRef } from "react";
+import React, { forwardRef, ForwardedRef } from "react";
 import Option from "./Option";
 
 type TSelectProps = {
-  arr: any;
+  arr: (TRateTable | TInstallment)[];
   typeSelect: string;
   id: string;
   label: string;
@@ -26,23 +26,21 @@ const Select = forwardRef(
           {...rest}
           className="h-[70%] w-[296px] rounded-md"
         >
-          {arr.map((item) => (
-            <React.Fragment key={item.id}>
-              {typeSelect == "table" ? (
+          {typeSelect === "table"
+            ? arr.map((item) => (
                 <Option
-                  value={String(item.id)}
-                  title={item.name}
-                  key={item.id}
+                  value={String((item as TRateTable).id)}
+                  title={(item as TRateTable).name}
+                  key={(item as TRateTable).id}
                 />
-              ) : (
+              ))
+            : arr.map((item) => (
                 <Option
-                  title={item.installment_number}
-                  value={String(item.id)}
-                  key={item.id}
+                  title={String((item as TInstallment).installment_number)}
+                  value={String((item as TInstallment).id)}
+                  key={(item as TInstallment).id}
                 />
-              )}
-            </React.Fragment>
-          ))}
+              ))}
         </select>
       </fieldset>
     );
