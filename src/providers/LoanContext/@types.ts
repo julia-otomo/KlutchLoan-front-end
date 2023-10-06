@@ -21,6 +21,15 @@ type TCard = {
   selfie_image: string;
 };
 
+type TCardCreate = {
+  card_number: string;
+  expiration_date: string;
+  cvv: string;
+  front_image: File;
+  back_image: File;
+  selfie_image: File;
+};
+
 type TClient = {
   id: number;
   name: string;
@@ -86,6 +95,9 @@ type TLoanContext = {
   installment: TInstallment | null;
   table: TRateTable | null;
   setTable: Dispatch<SetStateAction<TRateTable | null>>;
+  createCard: (data: TCardCreate, cpf: string) => Promise<void>;
+  card: TCard | null;
+  retrieveTable: (id: number, value: number) => Promise<void>;
 };
 
 export type {
@@ -96,4 +108,6 @@ export type {
   TSolicitation,
   TLoanContext,
   TInstallment,
+  TCard,
+  TCardCreate,
 };

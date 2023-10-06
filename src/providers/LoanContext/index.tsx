@@ -1,5 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createContext, useEffect, useState } from "react";
 import {
+  TCard,
+  TCardCreate,
   TClient,
   TInstallment,
   TLoanContext,
@@ -10,6 +13,7 @@ import {
 } from "./@types";
 import api from "@/services/api";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const LoanContext = createContext({} as TLoanContext);
 
@@ -22,6 +26,7 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     useState<TSolicitation | null>(null);
   const [installment, setInstallment] = useState<TInstallment | null>(null);
   const [table, setTable] = useState<TRateTable | null>(null);
+  const [card, setCard] = useState<TCard | null>(null);
 
   const createOrUpdateSolicitation = async (
     data: TSolicitationCreateUpdate
@@ -117,6 +122,7 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
       setClient(foundClient.data);
     } catch (error) {
       console.log(error);
+      toast.error("Cliente não encontrado !");
     }
   };
 
@@ -126,7 +132,7 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
 
     if (solicitationId) {
       try {
-        const getSolicitation = await api.get(
+        const getSolicitation = await api.get<TSolicitation>(
           `api/solicitation/${solicitationId}/`
         );
 
@@ -150,6 +156,33 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     getSolicitationEffect();
   }, []);
 
+  const createCard = async (data: TCardCreate, cpf: string) => {
+    const router = useRouter();
+    try {
+      const creditCard = await api.post(`api/cards/client/${cpf}/`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setCard(creditCard.data);
+
+      router.push("/preSolicitation");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const retrieveTable = async (id: number, value: number) => {
+    try {
+      const getTable = await api.get(`api/rateTable/${id}/?value=${value}`);
+
+      setTable(getTable.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <LoanContext.Provider
       value={{
@@ -168,6 +201,9 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         setInstallment,
         table,
         setTable,
+        card,
+        createCard,
+        retrieveTable,
       }}
     >
       {children}
