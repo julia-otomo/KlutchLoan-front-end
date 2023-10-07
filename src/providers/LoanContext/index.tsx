@@ -159,7 +159,12 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
 
   const createCard = async (data: TCardCreate, cpf: string) => {
     try {
-      const creditCard = await api.post(`api/cards/client/${cpf}/`, data);
+      const creditCard = await api.post(`api/cards/client/${cpf}/`, data, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setCard(creditCard.data);
 

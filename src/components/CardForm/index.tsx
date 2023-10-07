@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FieldError, useForm } from "react-hook-form";
 import { TRegisterCard, registerCardSchema } from "./validator";
 import Input from "./Input";
 import InputFile from "./InputFile";
 import { useContext, useState } from "react";
 import { LoanContext } from "@/providers/LoanContext";
-import Link from "next/link";
 import { TCardCreate } from "@/providers/LoanContext/@types";
 import { useRouter } from "next/router";
 
@@ -19,29 +18,41 @@ const CardForm = () => {
     resolver: zodResolver(registerCardSchema),
   });
 
-  const router = useRouter();
-
   const [frontImage, setFrontImage] = useState<File | null>(null);
   const [backImage, setBackImage] = useState<File | null>(null);
   const [selfieImage, setSelfieImage] = useState<File | null>(null);
+
+  const fileValidation =
+    ((frontImage?.size as number) &&
+      (backImage?.size as number) &&
+      (selfieImage?.size as number)) <
+    1024 * 1024 * 2;
 
   const { createCard, updateSolicitation, clientSolicitation } =
     useContext(LoanContext);
 
   const onSubmitForm = (data: TRegisterCard) => {
-    const newFormData = new FormData() as FormData & TCardCreate;
-    newFormData.append("card_number", data.card_number);
-    newFormData.append("expiration_date", data.expiration_date);
-    newFormData.append("cvv", data.cvv);
-    newFormData.append("front_image", frontImage as File);
-    newFormData.append("back_image", backImage as File);
-    newFormData.append("selfie_image", selfieImage as File);
+    if (fileValidation) {
+      const newFormData = new FormData() as FormData & TCardCreate;
+      newFormData.append("card_number", data.card_number);
+      newFormData.append("expiration_date", data.expiration_date);
+      newFormData.append("cvv", data.cvv);
+      newFormData.append("front_image", frontImage as File);
+      newFormData.append("back_image", backImage as File);
+      newFormData.append("selfie_image", selfieImage as File);
 
-    createCard(newFormData, clientSolicitation!.client.cpf);
+      createCard(newFormData, clientSolicitation!.client.cpf);
 
-    updateSolicitation({ card_number: data.card_number });
+      updateSolicitation({ card_number: data.card_number });
+    }
+  };
 
-    router.push("/preSolicitation");
+  const fileError = () => {
+    return !fileValidation && frontImage && backImage && selfieImage
+      ? ({
+          message: "São aceitos somente anexos de 2 MB um inferiores.",
+        } as FieldError)
+      : undefined;
   };
 
   return (
@@ -87,27 +98,33 @@ const CardForm = () => {
               id="front_image"
               label="Cartão de Crédito (Frente)"
               required
+              accept=".jpg,.jpeg,.png,.gif"
               onChange={(event) =>
                 setFrontImage(event.target.files ? event.target.files[0] : null)
               }
+              errors={fileError()}
             />
             <InputFile
               id="back_image"
               label="Cartão de Crédito (Verso)"
               required
+              accept=".jpg,.jpeg,.png,.gif"
               onChange={(event) =>
                 setBackImage(event.target.files ? event.target.files[0] : null)
               }
+              errors={fileError()}
             />
             <InputFile
               id="selfie_image"
               label="Selfie com cartão de crédito"
               required
+              accept=".jpg,.jpeg,.png,.gif"
               onChange={(event) =>
                 setSelfieImage(
                   event.target.files ? event.target.files[0] : null
                 )
               }
+              errors={fileError()}
             />
             <p className="text-brand-1">
               Atenção: As fotos devem estar legíveis, com todas as informações

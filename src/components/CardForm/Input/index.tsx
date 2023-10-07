@@ -21,7 +21,7 @@ const Input = forwardRef(
           ref={ref}
           className="w-full h-[70px] cursor-pointer border-[1px] border-transparent bg-grey-1 rounded-md text-slate-800 text-lg font-medium"
         />
-        {errors && <p className="text-red-800 text-md">{errors.message}</p>}
+        {errors && <p className="text-alert-color text-md">{errors.message}</p>}
       </fieldset>
     );
   }

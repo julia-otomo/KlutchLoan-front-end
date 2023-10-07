@@ -23,9 +23,16 @@ const InputFile = forwardRef(
           >
             Adicionar
           </label>
-          <input type="file" id={id} {...rest} ref={ref} className="hidden" />
+          <input
+            type="file"
+            id={id}
+            {...rest}
+            ref={ref}
+            className="hidden"
+            name={id}
+          />
         </div>
-        {errors && <p>{errors.message}</p>}
+        {errors && <p className=" text-alert-color">{errors.message}</p>}
       </fieldset>
     );
   }
