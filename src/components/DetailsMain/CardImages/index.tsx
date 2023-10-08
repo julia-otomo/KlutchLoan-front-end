@@ -12,7 +12,7 @@ const CardImages = ({ title, url }: TCardImages) => {
       <p className="text-grey-0 text-2xl">{title}</p>
       <AiTwotoneFile className=" fill-brand-2 w-[4rem] h-[4rem]" />
       <Link
-        href={url}
+        href={`http://res.cloudinary.com/dojrawoma/${url}`}
         target="_blank"
         className=" cursor-pointer text-brand-1 hover:underline hover:decoration-brand-1 text-xl"
       >
