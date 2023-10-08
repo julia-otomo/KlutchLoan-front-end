@@ -76,7 +76,7 @@ Caso prefira clonar o repositório:
 
 Observação: Para esse projeto foi utilizada a versão 9.6.2 do node.
 
-- Primeiramente é necessário é necessário clonar o repositório -> na página do repositório, há um botão azul escrito "code", ao clicar no mesmo irá mostrar um dropdown com as opções HTTPS, SSH, GitHub CLI. Escolha a opção SSH e copie o conteúdo. Após isso, abra um terminal, escreva git clone juntamente com o conteúdo copiado (como mostra na imagem abaixo);
+- Primeiramente é necessário clonar o repositório -> na página do repositório, há um botão azul escrito "code", ao clicar no mesmo irá mostrar um dropdown com as opções HTTPS, SSH, GitHub CLI. Escolha a opção SSH e copie o conteúdo. Após isso, abra um terminal, escreva git clone juntamente com o conteúdo copiado (como mostra na imagem abaixo);
 
 <img src="/src/assets/chave-ssh.png">
 
