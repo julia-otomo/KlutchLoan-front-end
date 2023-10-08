@@ -7,9 +7,12 @@ import { useContext } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import TablesContainer from "@/components/TablesContainer";
 import FirstPageFooter from "@/components/FirstPageFooter";
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
 
 const Home = () => {
-  const { tables, installment } = useContext(LoanContext);
+  const { tables, installment, loading, errorResponse } =
+    useContext(LoanContext);
   return (
     <>
       <Header />
@@ -17,8 +20,18 @@ const Home = () => {
         <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
       </div>
       <ValueForm />
-      {tables.length > 0 && <TablesContainer />}
-      {installment && <FirstPageFooter />}
+
+      {loading ? (
+        <div className="w-full flex items-center">
+          <Loading />
+        </div>
+      ) : errorResponse ? (
+        <ErrorComponent />
+      ) : tables.length > 0 ? (
+        <TablesContainer />
+      ) : null}
+
+      {installment ? <FirstPageFooter /> : null}
     </>
   );
 };

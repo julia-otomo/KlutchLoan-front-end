@@ -28,7 +28,7 @@ const CardInformation = ({
       </div>
 
       <p className="text-xl text-grey-0 italic font-bold">{`Número do cartão: ${card_number}`}</p>
-      <div className="flex">
+      <div className="flex gap-4">
         <p className="text-xl text-grey-0 italic font-bold">{`Validade: ${date}`}</p>
         <p className="text-xl text-grey-0 italic font-bold">{`CVV: ${cvv}`}</p>
       </div>

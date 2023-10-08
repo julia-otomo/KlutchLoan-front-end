@@ -6,9 +6,11 @@ import ClientForm from "@/components/ClientForm";
 import { useContext } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import ClientInformation from "@/components/ClientInformation";
+import Loading from "@/components/Loading";
+import ErrorComponent from "@/components/ErrorComponent";
 
 const ClientPage = () => {
-  const { client } = useContext(LoanContext);
+  const { client, loading, errorResponse } = useContext(LoanContext);
   return (
     <>
       <Header />
@@ -16,7 +18,15 @@ const ClientPage = () => {
         <Information img1={plus} img2={file} text="Solicitar Empréstimo" />
       </div>
       <ClientForm />
-      {client && <ClientInformation />}
+      {loading ? (
+        <div className="w-full flex items-center">
+          <Loading />
+        </div>
+      ) : errorResponse ? (
+        <ErrorComponent />
+      ) : client ? (
+        <ClientInformation />
+      ) : null}
     </>
   );
 };

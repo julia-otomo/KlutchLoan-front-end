@@ -28,12 +28,16 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
   const [installment, setInstallment] = useState<TInstallment | null>(null);
   const [table, setTable] = useState<TRateTable | null>(null);
   const [card, setCard] = useState<TCard | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [errorResponse, setErrorResponse] = useState(false);
 
   const createOrUpdateSolicitation = async (
     data: TSolicitationCreateUpdate
   ) => {
     const solicitationId =
       Number(localStorage.getItem("SolicitationTable:id")) || null;
+
+    setLoading(true);
 
     if (solicitationId) {
       try {
@@ -49,13 +53,16 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
 
         setDesiredValue(solicitation.data.desired_value);
         setClientSolicitation(solicitation.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         toast.error(
           "O valor desejado deve estar entre o intervalo de 300 à 10.000"
         );
+        setErrorResponse(true);
       }
     } else {
+      setLoading(true);
       try {
         const solicitation = await api.post<TSolicitation>(
           "api/solicitations/",
@@ -69,11 +76,13 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
 
         setDesiredValue(solicitation.data.desired_value);
         setClientSolicitation(solicitation.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         toast.error(
           "O valor desejado deve estar entre o intervalo de 300 à 10.000"
         );
+        setErrorResponse(true);
       }
     }
   };
@@ -84,6 +93,8 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
   ) => {
     const solicitationId =
       Number(localStorage.getItem("SolicitationTable:id")) || null;
+
+    setLoading(true);
 
     if (solicitationId) {
       try {
@@ -98,32 +109,41 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         );
 
         setClientSolicitation(solicitation.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setErrorResponse(true);
+        toast.error("Não foi possível atualizar a solicitação");
       }
     }
   };
 
   const getAllTables = async (value: number) => {
+    setLoading(true);
     try {
       const allTables = await api.get<TRateTable[]>(
         `api/rateTable/?value=${value}`
       );
 
       setTables(allTables.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setErrorResponse(true);
     }
   };
 
   const getClient = async (cpf: string) => {
+    setLoading(true);
     try {
       const foundClient = await api.get<TClient>(`api/clients/${cpf}/`);
 
       setClient(foundClient.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Cliente não encontrado !");
+      setErrorResponse(true);
     }
   };
 
@@ -205,6 +225,8 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         card,
         createCard,
         retrieveTable,
+        loading,
+        errorResponse,
       }}
     >
       {children}

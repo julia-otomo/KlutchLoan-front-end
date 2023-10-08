@@ -7,7 +7,6 @@ import InputFile from "./InputFile";
 import { useContext, useState } from "react";
 import { LoanContext } from "@/providers/LoanContext";
 import { TCardCreate } from "@/providers/LoanContext/@types";
-import { useRouter } from "next/router";
 
 const CardForm = () => {
   const {

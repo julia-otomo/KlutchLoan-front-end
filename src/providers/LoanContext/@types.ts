@@ -98,6 +98,8 @@ type TLoanContext = {
   createCard: (data: TCardCreate, cpf: string) => Promise<void>;
   card: TCard | null;
   retrieveTable: (id: number, value: number) => Promise<void>;
+  loading: boolean;
+  errorResponse: boolean;
 };
 
 export type {
