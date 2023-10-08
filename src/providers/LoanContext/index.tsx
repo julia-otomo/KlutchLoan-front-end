@@ -94,8 +94,6 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
     const solicitationId =
       Number(localStorage.getItem("SolicitationTable:id")) || null;
 
-    setLoading(true);
-
     if (solicitationId) {
       try {
         const solicitation = await api.patch<TSolicitation>(
@@ -109,7 +107,6 @@ const LoanProvider = ({ children }: TLoanProviderProps) => {
         );
 
         setClientSolicitation(solicitation.data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
         setErrorResponse(true);

@@ -4,31 +4,57 @@
 Esta aplicação tem como objetivo simular a solicitação de empréstimo de clientes.
 
 📚 Funcionalidades
--Cadastro de clientes: O administrador pode cadastrar novos clientes que estão interessados em realizar um empréstimo.
 
--Gerenciamento de clientes: O administrador pode gerenciar as informações dos clientes, sendo possível obter informações específicas de um cliente, atualizar as informações e deletar as informações.
+Obs: Como o deploy da API foi de forma gratuita no Render, é possível que dê alguns erros de requisição e aí é preciso reiniciar a página algumas vezes até funcionar.
 
--Cadastro da conta bancária de um cliente: O administrador pode cadastrar informações da conta bancária de um cliente e linkar ao perfil do mesmo.
+- <b>Adicionar o valor desejado para empréstimo:</b>
 
--Gerenciamento da conta bancária de um cliente: O administrador pode gerenciar as informações da conta bancária de um cliente, sendo possível visualizar, atualizar e deletar essas informações.
+<img src="/src/assets/page1.png">
 
--Cadastro de cartões de crédito de um cliente: O administrador pode cadastrar as informações de cartões de crédito de um cliente e linkar ao perfil do mesmo.
+-Selecionar a parcela;
 
--Gerenciamento de cartões de crédito de um cliente: O administrador pode gerenciar as informações de cartões de crédito de um cliente, sendo possível visualizar, atualizar e deletar essas informações.
+<img src="/src/assets/page1-2.png">
 
--Cadastro de tabelas de taxa: O administrador pode cadastrar novas tabelas de taxa.
+Exemplo:
 
--Gerenciamento de tabelas de taxa: O administrador pode gerenciar as informações as informações de uma tabela de taxa específica.
+<img src="/src/assets/page1-3.png">
 
--Cadastro das informações de parcelas de uma tabela de taxa: O administrador pode cadastrar informações de parcelas de uma tabela de taxa, adicionando taxas de juros para cada parcela e a comissão.
+Obs: A seleção da parcela não ficou muito evidente na tabela pois como o componente utilizado foi da bilioteca flowBite, ainda estou aprendendo como customizar a estilização desses componentes.
 
--Listagem das informações de parcelas de uma tabela de taxa: Ao enviar o valor de interesse por query params, é simulado o valor total e o valor da parcela para cada parcela de uma tabela de taxa.
+- <b>Selecionar cliente para a solicitação:</b>
+  Obs: Tanto o cadastro do cliente, como da tabela de taxa e de suas parcelas e da conta bancária do cliente devem ser realizadas diretamente pela API antes de acessar essa aplicação.
 
--Gerenciamento das informações de parcelas de uma tabela de taxa: O administrador pode gerenciar as informações de parcelas de uma tabela de taxa, sendo possível obter, atualizar e deletar essas informações.
+<img src="/src/assets/page2.png">
 
--Cadastro das informações de uma solicitação de empréstimo: O administrador pode cadastrar informações de uma solicitação de empréstimo, adicionando todas as informações necessárias para um empréstimo, linkando com um cliente, com uma tabela de taxa e com um tipo de parcela.
+<img src="/src/assets/page2-2.png">
 
--Gerenciamento das informações de uma solicitação de empréstimo: O administrador pode gerenciar as informações de uma solicitação de empréstimo, sendo possível obter, atualizar e deletar essas informações.
+- <b>Escolher modalidade:</b>
+  Obs: Essa página é apenas demonstrativa, pois somente a opção cartão de crédito está ativa.
+
+<img src="/src/assets/page3.png">
+
+- <b>Cadastrar cartão de crédito do cliente</b>
+
+<img src="/src/assets/page4.png">
+
+<img src="/src/assets/page4-2.png">
+
+Obs: Estou averiguando do porquê não estar aparecendo o nome dos arquivos ao lado do botão adicionar.
+
+- <b>Alterar tipo de contrato:</b>
+  Obs: Estoub tentando também deixar funcional a mudança de tabela e de parcela.
+
+<img src="/src/assets/page5.png">
+
+- <b>Mostrar informações parciais da solicitação de empréstimo:</b>
+
+<img src="/src/assets/page6.png">
+
+- <b>Mostrar informações completas da solicitação de empréstimo:</b>
+
+<img src="/src/assets/page7.png">
+
+<img src="/src/assets/page7-2.png">
 
 ## :wrench: Tecnologias utilizadas
 
@@ -50,7 +76,18 @@ Caso prefira clonar o repositório:
 
 Observação: Para esse projeto foi utilizada a versão 9.6.2 do node.
 
-- Primeiramente é necessário é necessário clonar o repositório;
+- Primeiramente é necessário é necessário clonar o repositório -> na página do repositório, há um botão azul escrito "code", ao clicar no mesmo irá mostrar um dropdown com as opções HTTPS, SSH, GitHub CLI. Escolha a opção SSH e copie o conteúdo. Após isso, abra um terminal, escreva git clone juntamente com o conteúdo copiado (como mostra na imagem abaixo);
+
+<img src="/src/assets/chave-ssh.png">
+
+<img src="/src/assets/terminal.png">
+
+-Para abrir o projeto no vscode, abra o terminal no local aonde foi clonado o projeto e escreva:
+
+```bash
+code .
+```
+
 - Depois insira o seguinte comando no terminal ao iniciar o projeto para instalar todas as dependências necessárias:
 
 1. Instale todas as dependências:
