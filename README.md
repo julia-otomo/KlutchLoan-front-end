@@ -5,7 +5,7 @@ Esta aplicação tem como objetivo simular a solicitação de empréstimo de cli
 
 📚 Funcionalidades
 
-Obs: Como o deploy da API foi de forma gratuita no Render, é possível que dê alguns erros de requisição e aí é preciso reiniciar a página algumas vezes até funcionar.
+Obs: Como o deploy da API foi realizada de forma gratuita no Render (serviço de armazenamento em nuvem de aplicativos e websites), é possível que dê alguns erros de requisição e aí é preciso reiniciar a página algumas vezes até funcionar.
 
 - <b>Adicionar o valor desejado para empréstimo:</b>
 
@@ -19,7 +19,7 @@ Exemplo:
 
 <img src="/src/assets/page1-3.png">
 
-Obs: A seleção da parcela não ficou muito evidente na tabela pois como o componente utilizado foi da bilioteca flowBite, ainda estou aprendendo como customizar a estilização desses componentes.
+Obs: A seleção da parcela não ficou muito evidente na tabela pois como o componente utilizado foi da biblioteca flowBite (é uma biblioteca open-source de componentes UI baseada na estrutura Tailwind CSS), ainda estou aprendendo como customizar a estilização desses componentes.
 
 - <b>Selecionar cliente para a solicitação:</b>
   Obs: Tanto o cadastro do cliente, como da tabela de taxa e de suas parcelas e da conta bancária do cliente devem ser realizadas diretamente pela API antes de acessar essa aplicação.
@@ -42,7 +42,7 @@ Obs: A seleção da parcela não ficou muito evidente na tabela pois como o comp
 Obs: Estou averiguando do porquê não estar aparecendo o nome dos arquivos ao lado do botão adicionar.
 
 - <b>Alterar tipo de contrato:</b>
-  Obs: Estoub tentando também deixar funcional a mudança de tabela e de parcela.
+  Obs: Estou tentando também deixar funcional a mudança de tabela e de parcela.
 
 <img src="/src/assets/page5.png">
 
